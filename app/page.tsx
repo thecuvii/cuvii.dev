@@ -9,7 +9,6 @@ export default function Home() {
         <h1>
           Hi, it's <span className="font-bold">Cuvii</span> here.
         </h1>
-
         <section className="mt-6 flex items-center justify-center gap-4">
           <Link className="block size-4" href={"https://twitter.com/_cuvii_"}>
             <svg
