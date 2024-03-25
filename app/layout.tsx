@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { PHProvider } from "./providers";
+import PostHogPageView from "./PostHogPageView";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,9 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="h-[100dvh]">{children}</div>
-      </body>
+      <PHProvider>
+        <body className={inter.className}>
+          <PostHogPageView />
+          <div className="h-[100dvh]">{children}</div>
+        </body>
+      </PHProvider>
     </html>
   );
 }
