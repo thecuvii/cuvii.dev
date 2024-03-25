@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { PHProvider } from "./providers";
 import PostHogPageView from "./PostHogPageView";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <PHProvider>
         <body className={inter.className}>
-          <PostHogPageView />
+          <Suspense>
+            <PostHogPageView />
+          </Suspense>
           <div className="h-[100dvh]">{children}</div>
         </body>
       </PHProvider>
