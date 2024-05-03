@@ -4,11 +4,13 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev -p 8088 & npx goloco -d cuvii -p 8088",
+    "turbo": "next dev --turbo -p 8088 & npx goloco -d cuvii -p 8088",
     "lint": "next lint",
     "start": "next start"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "next",
+    "@tailwindcss/postcss": "4.0.0-alpha.14",
+    "framer-motion": "^11.1.7",
     "next": "canary",
     "posthog-js": "^1.128.1",
     "react": "^18.2.0",
@@ -22,7 +24,7 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.2",
     "postcss": "^8.4.38",
-    "tailwindcss": "next",
+    "tailwindcss": "4.0.0-alpha.14",
     "typescript": "^5.4.5"
   },
   "packageManager": "pnpm@9.0.4"

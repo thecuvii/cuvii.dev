@@ -8,7 +8,7 @@ import { Suspense } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Cuvii.dev",
+  title: "Life OS",
 };
 
 export default function RootLayout({
