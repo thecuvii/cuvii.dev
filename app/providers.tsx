@@ -3,6 +3,7 @@ import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 
 if (typeof window !== "undefined") {
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
     api_host: "/ingest",
     capture_pageview: false, // Disable automatic pageview capture, as we capture manually
