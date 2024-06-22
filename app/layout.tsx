@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { PHProvider } from "./providers";
-import PostHogPageView from "./PostHogPageView";
 import { Suspense } from "react";
+import PostHogPageView from "./PostHogPageView";
+import { PHProvider } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +23,7 @@ export default function RootLayout({
           <Suspense>
             <PostHogPageView />
           </Suspense>
-          <div className="h-[100dvh]">{children}</div>
+          <div className="min-h-dvh">{children}</div>
         </body>
       </PHProvider>
     </html>
