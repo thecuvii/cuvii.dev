@@ -1,0 +1,11 @@
+{
+  "name": "@cuvii.dev/prettier-config",
+  "version": "1.0.0",
+  "exports": {
+    "default": "./prettier.config.mjs"
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
+    "prettier": "^3.3.2"
+  }
+}

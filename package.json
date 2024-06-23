@@ -1,19 +1,22 @@
 {
-  "name": "my-turborepo",
+  "name": "cuvii.dev",
   "private": true,
+  "packageManager": "pnpm@9.4.0",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "lint": "turbo lint"
   },
   "devDependencies": {
-    "prettier": "^3.2.5",
+    "@cuvii.dev/eslint-config": "workspace:*",
+    "@cuvii.dev/prettier-config": "workspace:*",
+    "@turbo/gen": "^2.0.4",
+    "eslint": "^9.5.0",
+    "prettier": "^3.3.2",
     "turbo": "^2.0.4",
-    "typescript": "^5.4.5"
-  },
-  "packageManager": "pnpm@8.15.6",
-  "engines": {
-    "node": ">=18"
+    "typescript": "^5.5.2"
   }
 }

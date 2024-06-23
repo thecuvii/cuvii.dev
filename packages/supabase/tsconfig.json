@@ -1,0 +1,5 @@
+{
+  "extends": "@cuvii.dev/typescript-config",
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

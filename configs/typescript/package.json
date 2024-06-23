@@ -1,0 +1,8 @@
+{
+  "name": "@cuvii.dev/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "default": "./nextjs.tsconfig.json"
+  }
+}
