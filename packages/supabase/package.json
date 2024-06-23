@@ -6,21 +6,15 @@
   "exports": {
     ".": {
       "types": "./src/index.ts",
-      "react-server": {
-        "development": "./src/index.react-server.ts",
-        "default": "./dist/index.react-server.js"
-      },
-      "default": {
-        "development": "./src/index.ts",
-        "default": "./dist/index.js"
-      }
+      "react-server": "./src/index.react-server.ts",
+      "default": "./src/index.ts"
     }
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "build": "bunchee"
+    "gen-db": "npx supabase gen types typescript --project-id xscylifsgjuxhywthmts --schema public > src/database.type.ts"
+  },
+  "peerDependencies": {
+    "next": "15.0.0-canary.41"
   },
   "dependencies": {
     "@supabase/ssr": "^0.3.0",
@@ -28,8 +22,6 @@
   },
   "devDependencies": {
     "@cuvii.dev/typescript-config": "workspace:*",
-    "bunchee": "^5.2.2",
-    "tsup": "^8.1.0",
     "typescript": "^5.5.2"
   }
 }

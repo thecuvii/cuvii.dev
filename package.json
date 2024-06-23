@@ -8,7 +8,8 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "gen-db": "pnpm run --filter @cuvii.dev/supabase gen-db"
   },
   "devDependencies": {
     "@cuvii.dev/eslint-config": "workspace:*",
