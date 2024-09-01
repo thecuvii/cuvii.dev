@@ -2,24 +2,35 @@
   "name": "cuvii.dev",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@9.9.0",
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "geist": "^1.3.1",
+    "next": "15.0.0-canary.137",
     "react": "19.0.0-rc-7771d3a7-20240827",
-    "react-dom": "19.0.0-rc-7771d3a7-20240827",
-    "next": "15.0.0-canary.137"
+    "react-dom": "19.0.0-rc-7771d3a7-20240827"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint-react/eslint-plugin": "^1.12.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@zolplay/eslint-config": "2.0.0-beta.15",
+    "@zolplay/prettier-config": "2.0.0-beta.15",
+    "eslint": "^9.9.1",
+    "eslint-plugin-react-hooks": "5.1.0-rc-e56f4ae3-20240830",
+    "eslint-plugin-react-refresh": "^0.4.11",
+    "eslint-plugin-svg-jsx": "^1.2.4",
+    "lint-staged": "^15.2.9",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1"
-  },
-  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
+    "prettier": "^3.3.3",
+    "simple-git-hooks": "^2.11.1",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
 }
