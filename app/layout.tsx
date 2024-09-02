@@ -1,6 +1,7 @@
 import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
 
+import './variables.css'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${GeistSans.variable} antialiased`}>{children}</body>
+      <body className={`${GeistSans.variable} bg-theme-background antialiased`}>{children}</body>
     </html>
   )
 }

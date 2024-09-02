@@ -1,0 +1,16 @@
+:root {
+  --background: #f8f8f8;
+  --foreground: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #000;
+    --text-color: #fff;
+    --primary-color: #1a73e8;
+    --secondary-color: #e8eaed;
+    --accent-color: #bb86fc;
+    --muted-color: #3c4043;
+    --border-color: #5f6368;
+  }
+}
