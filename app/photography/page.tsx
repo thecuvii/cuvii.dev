@@ -1,5 +1,9 @@
 import { Gallery } from '~/features/gallery'
 
 export default async function PhotographyPage() {
-  return <Gallery />
+  return (
+    <main className='p-2'>
+      <Gallery />
+    </main>
+  )
 }
