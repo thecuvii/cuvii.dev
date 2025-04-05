@@ -1,14 +1,5 @@
-import Image from 'next/image'
-import { IMAGES } from '~/images'
+import { Gallery } from '~/features/gallery'
 
-export default function PhotographyPage() {
-  return (
-    <ul>
-      <li>
-        {IMAGES.map((image, idx) => (
-          <Image key={idx} src={image.src} alt='' placeholder='blur' />
-        ))}
-      </li>
-    </ul>
-  )
+export default async function PhotographyPage() {
+  return <Gallery />
 }
