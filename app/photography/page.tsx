@@ -6,7 +6,7 @@ export default function PhotographyPage() {
     <ul>
       <li>
         {IMAGES.map((image, idx) => (
-          <Image key={idx} src={image.src} alt="" placeholder="blur" />
+          <Image key={idx} src={image.src} alt='' placeholder='blur' />
         ))}
       </li>
     </ul>
