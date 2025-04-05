@@ -10,9 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@studio-freight/lenis": "^1.0.42",
-    "lenis": "^1.2.3",
-    "motion": "^12.6.3",
     "next": "canary",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
