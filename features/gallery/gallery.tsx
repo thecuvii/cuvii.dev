@@ -1,20 +1,25 @@
+'use client'
+
 import Image from 'next/image'
+import { Masonry } from 'react-plock'
 import { GALLERY_IMAGES } from './datasource'
 
 export function Gallery() {
   return (
-    <ul className='grid gap-2 grid-cols-[repeat(auto-fit,minmax(440px,1fr))]'>
+    <main className='container mx-auto'>
       {GALLERY_IMAGES.map((item) => (
-        <li key={item.image.src} className='h-[700px] inline-block relative outline-0 md:w-full md:min-w-[unset]'>
-          <Image
-            src={item.image}
-            alt={item.description}
-            className='absolute size-full inset-0 select-none object-cover'
-            placeholder='blur'
-            sizes=' (max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw '
-          />
-        </li>
+        <Masonry
+          key={item.title}
+          items={item.images}
+          config={{
+            columns: [1, 2, 3, 4],
+            gap: [6, 6, 6, 6],
+            media: [640, 768, 1024, 1280],
+            useBalancedLayout: false,
+          }}
+          render={(image) => <Image src={image} alt={item.title} className='select-none' placeholder='blur' />}
+        />
       ))}
-    </ul>
+    </main>
   )
 }
