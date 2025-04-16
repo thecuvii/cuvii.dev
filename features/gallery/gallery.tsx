@@ -2,37 +2,34 @@
 
 import Image from 'next/image'
 import { Masonry } from 'react-plock'
-import { cloudflareImageLoader } from './cf-image-loader'
-import { GALLERY_IMAGES } from './datasource'
+import { generateCloudflareImageUrl } from './cf-image-loader'
 
-export function Gallery() {
+export function Gallery({ images }: { images: { url: string }[] }) {
   return (
     <main className='container mx-auto'>
-      {GALLERY_IMAGES.map((item) => (
-        <Masonry
-          key={item.title}
-          items={item.images}
-          config={{
-            columns: [1, 2, 3, 4],
-            gap: [6, 6, 6, 6],
-            media: [640, 768, 1024, 1280],
-            useBalancedLayout: false,
-          }}
-          render={(image) => (
-            <div className='relative h-[320px]'>
-              <Image
-                loader={cloudflareImageLoader}
-                src={image}
-                alt={item.title}
-                className='select-none'
-                sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
-                placeholder='empty'
-                fill
-              />
-            </div>
-          )}
-        />
-      ))}
+      <Masonry
+        items={images.map((image) => image.url)}
+        config={{
+          columns: [1, 2, 3, 4],
+          gap: [6, 6, 6, 6],
+          media: [640, 768, 1024, 1280],
+          useBalancedLayout: false,
+        }}
+        render={(image) => (
+          <div className='relative'>
+            <Image
+              loader={generateCloudflareImageUrl}
+              src={image}
+              alt=''
+              className='select-none w-full h-auto'
+              sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
+              placeholder='empty'
+              width={0}
+              height={0}
+            />
+          </div>
+        )}
+      />
     </main>
   )
 }
