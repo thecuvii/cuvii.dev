@@ -12,10 +12,11 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.787.0",
+    "@egjs/react-infinitegrid": "^4.12.0",
+    "@zolplay/clsxm": "^1.0.0",
     "next": "15.3.1-canary.7",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-plock": "^3.5.1"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.12.0",
