@@ -3,6 +3,7 @@ import { Buffer } from 'node:buffer'
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
 import { ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3'
+import { imageSize } from 'image-size'
 import pLimit from 'p-limit'
 import { IMAGE_HOST } from '~/constants'
 import { generateCloudflareImageUrl } from '~/features/gallery/cf-image-loader'
@@ -17,9 +18,8 @@ const CONCURRENCY = 10
 
 // --- Types ---
 type ImageMeta = {
-  url: string
-  key: string
   blurDataUrl: string | null
+  aspectRatio: number | null
 }
 
 type ImageCache = Record<string, ImageMeta>
@@ -74,7 +74,7 @@ async function listAllR2Keys(): Promise<string[]> {
 
       if (list.Contents) {
         const imageKeys = list.Contents.map((item: _Object) => item.Key!).filter((key) =>
-          /\.(jpg|jpeg|png|gif|webp)$/i.test(key),
+          /\.(?:jpg|jpeg|png|gif|webp)$/i.test(key),
         )
         allKeys.push(...imageKeys)
       }
@@ -102,16 +102,18 @@ async function fetchBlurDataUrl(key: string): Promise<ImageMeta | null> {
     const response = await fetch(blurUrl)
     if (!response.ok) {
       console.error(`Failed to fetch blur image for ${key}: ${response.status} ${response.statusText}`)
-      return { url, key, blurDataUrl: null }
+      return { blurDataUrl: null, aspectRatio: null }
     }
     const buffer = await response.arrayBuffer()
+    const size = imageSize(new Uint8Array(buffer))
+    const aspectRatio = size.width / size.height
     const base64 = Buffer.from(buffer).toString('base64')
     const mimeType = response.headers.get('content-type') || 'image/webp'
     const blurDataUrl = `data:${mimeType};base64,${base64}`
-    return { url, key, blurDataUrl }
+    return { blurDataUrl, aspectRatio }
   } catch (error) {
     console.error(`Network error fetching blur image for ${key}:`, error)
-    return { url, key, blurDataUrl: null }
+    return { blurDataUrl: null, aspectRatio: null }
   }
 }
 

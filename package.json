@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.787.0",
-    "image-size": "^2.0.2",
     "next": "15.3.1-canary.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -32,6 +31,7 @@
     "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "image-size": "^2.0.2",
     "p-limit": "^6.2.0",
     "prettier": "^3.5.3",
     "tailwindcss": "^4.1.3",
