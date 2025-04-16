@@ -1,18 +1,13 @@
-import type { _Object } from '@aws-sdk/client-s3'
 import { Buffer } from 'node:buffer'
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
-import { ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3'
 import { imageSize } from 'image-size'
 import pLimit from 'p-limit'
 import { IMAGE_HOST } from '~/constants'
 import { generateCloudflareImageUrl } from '~/features/gallery/cf-image-loader'
+import { queryImageKeys } from '~/features/gallery/query-images'
 
 // --- Configuration ---
-const R2_ENDPOINT = process.env.R2_ENDPOINT!
-const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID!
-const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY!
-const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME!
 const CACHE_FILE_PATH = path.resolve(__dirname, '../features/gallery/image-cache.json')
 const CONCURRENCY = 10
 
@@ -23,16 +18,6 @@ type ImageMeta = {
 }
 
 type ImageCache = Record<string, ImageMeta>
-
-// --- R2 Client ---
-const R2 = new S3Client({
-  region: 'auto',
-  endpoint: R2_ENDPOINT,
-  credentials: {
-    accessKeyId: R2_ACCESS_KEY_ID,
-    secretAccessKey: R2_SECRET_ACCESS_KEY,
-  },
-})
 
 async function readCache(): Promise<ImageCache> {
   try {
@@ -56,38 +41,6 @@ async function writeCache(cache: ImageCache): Promise<void> {
     console.error('Error writing cache file:', error)
     throw error
   }
-}
-
-async function listAllR2Keys(): Promise<string[]> {
-  const allKeys: string[] = []
-  let isTruncated = true
-  let continuationToken: string | undefined
-
-  console.log('Listing objects in R2 bucket:', R2_BUCKET_NAME)
-  while (isTruncated) {
-    try {
-      const command = new ListObjectsV2Command({
-        Bucket: R2_BUCKET_NAME,
-        ContinuationToken: continuationToken,
-      })
-      const list = await R2.send(command)
-
-      if (list.Contents) {
-        const imageKeys = list.Contents.map((item: _Object) => item.Key!).filter((key) =>
-          /\.(?:jpg|jpeg|png|gif|webp)$/i.test(key),
-        )
-        allKeys.push(...imageKeys)
-      }
-
-      isTruncated = !!list.IsTruncated
-      continuationToken = list.NextContinuationToken
-    } catch (error) {
-      console.error('Error listing R2 objects:', error)
-      throw error
-    }
-  }
-  console.log(`Found ${allKeys.length} images in R2.`)
-  return allKeys
 }
 
 async function fetchBlurDataUrl(key: string): Promise<ImageMeta | null> {
@@ -121,15 +74,8 @@ async function fetchBlurDataUrl(key: string): Promise<ImageMeta | null> {
 async function updateImageCache() {
   console.log('Starting image metadata fetch...')
 
-  if (!R2_ENDPOINT || !R2_ACCESS_KEY_ID || !R2_SECRET_ACCESS_KEY || !R2_BUCKET_NAME) {
-    console.error(
-      'Missing required environment variables (R2_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME).',
-    )
-    process.exit(1)
-  }
-
   const cache = await readCache()
-  const r2Keys = await listAllR2Keys()
+  const r2Keys = await queryImageKeys()
 
   const existingKeys = new Set(Object.keys(cache))
   const newKeys = r2Keys.filter((key) => !existingKeys.has(key))
