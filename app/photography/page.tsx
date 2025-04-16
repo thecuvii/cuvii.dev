@@ -12,17 +12,19 @@ export default async function PhotographyPage() {
   'use cache'
 
   const imageKeys = await queryImageKeys()
-  const images = imageKeys.map((imageKey) => {
-    const cache = imageCache[imageKey.key as keyof typeof imageCache]
-    return {
-      url: imageKey.url,
-      aspectRatio: cache.aspectRatio,
-      blurDataUrl: cache.blurDataUrl,
-    }
-  })
+  const images = imageKeys
+    .sort((a, b) => b.key.localeCompare(a.key))
+    .map((imageKey) => {
+      const cache = imageCache[imageKey.key as keyof typeof imageCache]
+      return {
+        url: imageKey.url,
+        aspectRatio: cache.aspectRatio,
+        blurDataUrl: cache.blurDataUrl,
+      }
+    })
 
   return (
-    <main className='p-2'>
+    <main>
       <Gallery images={images} />
     </main>
   )
