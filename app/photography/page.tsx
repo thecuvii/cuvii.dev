@@ -29,7 +29,7 @@ export default async function PhotographyPage() {
   const images = await getImagesDatasource()
 
   return (
-    <main>
+    <main className='bg-stone-900'>
       <Gallery images={images} />
     </main>
   )

@@ -7,16 +7,16 @@ import { generateCloudflareImageUrl } from './cf-image-loader'
 
 export function Gallery({ images }: { images: { url: string; aspectRatio: number; blurDataUrl: string }[] }) {
   return (
-    <MasonryInfiniteGrid gap={0} align='center'>
+    <MasonryInfiniteGrid gap={4} align='center' useRoundedSize={false} percentage useResizeObserver>
       {images.map((image) => (
-        <div className='relative' key={image.url}>
+        <div key={image.url}>
           <Image
             src={image.blurDataUrl}
             alt=''
             className={clsxm(
               'select-none w-full h-auto',
               image.aspectRatio && `aspect-[${image.aspectRatio}]`,
-              'min-w-[200px] sm:min-w-[300px] md:min-w-[400px] lg:min-w-[500px]',
+              'min-w-[100vw] sm:min-w-[50vw] md:min-w-[33vw] lg:min-w-[25vw] xl:min-w-[20vw] 2xl:min-w-[17vw] ',
             )}
             width={0}
             height={0}
