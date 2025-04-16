@@ -5,7 +5,7 @@ import { imageSize } from 'image-size'
 import pLimit from 'p-limit'
 import { IMAGE_HOST } from '~/constants'
 import { generateCloudflareImageUrl } from '~/features/gallery/cf-image-loader'
-import { queryImageKeys } from '~/features/gallery/query-images'
+import { queryImageKeys } from '~/features/gallery/query-image-keys'
 
 // --- Configuration ---
 const CACHE_FILE_PATH = path.resolve(__dirname, '../features/gallery/image-cache.json')
@@ -75,7 +75,7 @@ async function updateImageCache() {
   console.log('Starting image metadata fetch...')
 
   const cache = await readCache()
-  const r2Keys = await queryImageKeys()
+  const r2Keys = (await queryImageKeys()).map((queryImageKey) => queryImageKey.key)
 
   const existingKeys = new Set(Object.keys(cache))
   const newKeys = r2Keys.filter((key) => !existingKeys.has(key))

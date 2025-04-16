@@ -34,5 +34,8 @@ export async function queryImageKeys() {
     continuationToken = list.NextContinuationToken
   }
 
-  return Promise.all(allKeys.map(async (key) => `${IMAGE_HOST}/${key}`))
+  return allKeys.map((key) => ({
+    key,
+    url: `${IMAGE_HOST}/${key}`,
+  }))
 }
