@@ -8,11 +8,10 @@ export const metadata: Metadata = {
   description: 'Photography',
 }
 
-export default async function PhotographyPage() {
+async function getImagesDatasource() {
   'use cache'
-
   const imageKeys = await queryImageKeys()
-  const images = imageKeys
+  return imageKeys
     .sort((a, b) => b.key.localeCompare(a.key))
     .map((imageKey) => {
       const cache = imageCache[imageKey.key as keyof typeof imageCache]
@@ -22,6 +21,10 @@ export default async function PhotographyPage() {
         blurDataUrl: cache.blurDataUrl,
       }
     })
+}
+
+export default async function PhotographyPage() {
+  const images = await getImagesDatasource()
 
   return (
     <main>
