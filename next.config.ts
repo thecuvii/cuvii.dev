@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     dynamicIO: true,
     ppr: true,
   },
+  output: 'standalone',
   images: {
     remotePatterns: [
       {

@@ -1,0 +1,47 @@
+# .dockerignore
+
+# Git files
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+.dockerignore
+
+# Node dependencies (we install them inside the container)
+node_modules
+
+# PNPM debug log
+pnpm-debug.log*
+pnpm-lock.yaml # Let Docker manage this file copy for caching
+
+# Next.js build artifacts (we build inside the container)
+.next
+dist # If you have custom output dirs
+
+# Local environment variables
+.env*
+!.env.example
+!.env.production
+
+# Test files & config
+*.test.js
+*.spec.js
+jest.config.js
+playwright.config.js
+
+# Documentation
+docs/
+
+# IDE & OS specific
+.vscode
+.idea
+.DS_Store
+*.bak
+*.swp
+
+# Other temporary or local files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
