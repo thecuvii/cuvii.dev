@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { Inter } from 'next/font/google'
 
+import Script from 'next/script'
 import './globals.css'
 
 // If loading a variable font, you don't need to specify the font weight
@@ -22,6 +23,8 @@ export default function RootLayout({
   return (
     <html lang='en' className={inter.className}>
       <body className='antialiased'>{children}</body>
+
+      <Script defer src='https://umami.cuvii.dev/script.js' data-website-id='a0d975d8-176f-47a3-9e87-abd06eb581e3' />
     </html>
   )
 }
