@@ -52,7 +52,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# 切换到非 root 用户
 USER nextjs
 
 EXPOSE ${PORT}
