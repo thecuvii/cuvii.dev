@@ -2,6 +2,8 @@
 ARG NODE_VERSION=22
 FROM node:${NODE_VERSION}-alpine AS base
 
+RUN apk update && apk add --no-cache curl
+
 RUN corepack enable
 
 WORKDIR /app
