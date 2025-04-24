@@ -3,7 +3,6 @@ export default function HomePage() {
     <div className='h-screen grid place-items-center'>
       <div>
         <h1 className='text-sm'>Coming soon</h1>
-        <p className='text-xs'>{process.env.SOURCE_COMMIT}</p>
       </div>
     </div>
   )
