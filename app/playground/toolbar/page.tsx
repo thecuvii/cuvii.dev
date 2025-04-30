@@ -3,6 +3,7 @@
 import { clsxm } from '@zolplay/clsxm'
 import { motion } from 'motion/react'
 import { HouseGrinIcon } from '~/components/icons'
+import { PhotoAlbum } from '~/components/icons/photo-album'
 import { MLink } from '~/lib/motion'
 
 export default function PlaygroundToolbar() {
@@ -26,7 +27,7 @@ export default function PlaygroundToolbar() {
           <HouseGrinIcon />
         </ToolbarItem>
         <ToolbarItem href='/blog' label='Blog'>
-          Blog
+          <PhotoAlbum />
         </ToolbarItem>
       </nav>
     </motion.div>
