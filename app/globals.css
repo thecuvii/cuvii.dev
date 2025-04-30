@@ -13,6 +13,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-inter: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,4 +28,5 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  letter-spacing: -8%;
 }
