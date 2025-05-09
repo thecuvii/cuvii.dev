@@ -25,9 +25,11 @@ export default function PlaygroundToolbar() {
       >
         <ToolbarItem href='/' label='Home'>
           <HouseGrinIcon />
+          <span className='text-xs font-mono'>Home</span>
         </ToolbarItem>
         <ToolbarItem href='/blog' label='Blog'>
           <PhotoAlbum />
+          <span className='text-xs font-mono'>Blog</span>
         </ToolbarItem>
       </nav>
     </motion.div>
