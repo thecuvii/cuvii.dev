@@ -1,6 +1,5 @@
 'use client'
 
-import { MasonryInfiniteGrid } from '@egjs/react-infinitegrid'
 import { atom } from 'jotai'
 import { GalleryImage } from './gallery-image'
 
@@ -12,11 +11,32 @@ export type GalleryImageItem = {
 
 export const activeImageAtom = atom<GalleryImageItem | null>(null)
 export function Gallery({ images }: { images: GalleryImageItem[] }) {
+  if (!images || images.length === 0) {
+    return null
+  }
+
+  const numCols = Math.max(1, Math.ceil(Math.sqrt(images.length)))
+  const gap = '64px'
+
   return (
-    <MasonryInfiniteGrid gap={0} align='center' useRoundedSize={false} percentage useResizeObserver>
-      {images.map((image) => (
-        <GalleryImage key={image.url} image={image} />
+    <div
+      className='will-change-transform'
+      style={{
+        display: 'grid',
+        gridTemplateColumns: `repeat(${numCols}, minmax(0, 1fr))`,
+        gap,
+      }}
+    >
+      {images.map((imageItem) => (
+        <GalleryImage
+          key={imageItem.url}
+          className='w-[440px]'
+          style={{
+            aspectRatio: imageItem.aspectRatio,
+          }}
+          image={imageItem}
+        />
       ))}
-    </MasonryInfiniteGrid>
+    </div>
   )
 }

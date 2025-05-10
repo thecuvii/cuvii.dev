@@ -5,8 +5,8 @@ import imageCache from '~/features/gallery/image-cache.json'
 import { queryImageKeys } from '~/features/gallery/query-image-keys'
 
 export const metadata: Metadata = {
-  title: 'Photography',
-  description: 'Photography',
+  title: 'Gallery',
+  description: 'Gallery',
 }
 
 async function getImagesDatasource() {
@@ -25,11 +25,11 @@ async function getImagesDatasource() {
     })
 }
 
-export default async function PhotographyPage() {
+export default async function GalleryPage() {
   const images = await getImagesDatasource()
 
   return (
-    <main className='bg-stone-900'>
+    <main className='bg-stone-900 w-screen h-screen'>
       <Gallery images={images} />
     </main>
   )
