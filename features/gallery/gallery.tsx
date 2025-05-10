@@ -19,7 +19,7 @@ export function Gallery({ images }: { images: GalleryImageItem[] }) {
 
   return (
     <div
-      className='will-change-transform inline-grid gap-16'
+      className='will-change-transform inline-grid gap-16 -translate-x-1/2 -translate-y-1/2'
       style={{
         gridTemplateColumns: `repeat(${numCols}, 440px)`,
       }}
