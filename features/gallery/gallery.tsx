@@ -1,6 +1,7 @@
 'use client'
 
 import { atom } from 'jotai'
+import { motion } from 'motion/react'
 import { GalleryImage } from './gallery-image'
 
 export type GalleryImageItem = {
@@ -18,7 +19,8 @@ export function Gallery({ images }: { images: GalleryImageItem[] }) {
   const numCols = Math.max(1, Math.ceil(Math.sqrt(images.length)))
 
   return (
-    <div
+    <motion.div
+      drag
       className='will-change-transform inline-grid gap-16 -translate-x-1/2 -translate-y-1/2'
       style={{
         gridTemplateColumns: `repeat(${numCols}, 440px)`,
@@ -37,6 +39,6 @@ export function Gallery({ images }: { images: GalleryImageItem[] }) {
           />
         )
       })}
-    </div>
+    </motion.div>
   )
 }
