@@ -22,21 +22,24 @@ export function Gallery({ images }: { images: GalleryImageItem[] }) {
     <div
       className='will-change-transform'
       style={{
-        display: 'grid',
-        gridTemplateColumns: `repeat(${numCols}, minmax(0, 1fr))`,
+        display: 'inline-grid',
+        gridTemplateColumns: `repeat(${numCols}, 440px)`,
         gap,
       }}
     >
-      {images.map((imageItem) => (
-        <GalleryImage
-          key={imageItem.url}
-          className='w-[440px]'
-          style={{
-            aspectRatio: imageItem.aspectRatio,
-          }}
-          image={imageItem}
-        />
-      ))}
+      {images.map((img) => {
+        const width = img.aspectRatio < 1 ? '320px' : '440px'
+        return (
+          <GalleryImage
+            key={img.url}
+            style={{
+              width,
+              aspectRatio: img.aspectRatio,
+            }}
+            image={img}
+          />
+        )
+      })}
     </div>
   )
 }
