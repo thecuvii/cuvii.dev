@@ -29,7 +29,7 @@ export default async function GalleryPage() {
   const images = await getImagesDatasource()
 
   return (
-    <main className='bg-stone-900 w-screen h-screen'>
+    <main className='bg-black w-screen h-screen'>
       <Gallery images={images} />
     </main>
   )

@@ -16,19 +16,16 @@ export function Gallery({ images }: { images: GalleryImageItem[] }) {
   }
 
   const numCols = Math.max(1, Math.ceil(Math.sqrt(images.length)))
-  const gap = '64px'
 
   return (
     <div
-      className='will-change-transform'
+      className='will-change-transform inline-grid gap-16'
       style={{
-        display: 'inline-grid',
         gridTemplateColumns: `repeat(${numCols}, 440px)`,
-        gap,
       }}
     >
       {images.map((img) => {
-        const width = img.aspectRatio < 1 ? '320px' : '440px'
+        const width = img.aspectRatio < 1 ? '260px' : '440px'
         return (
           <GalleryImage
             key={img.url}
