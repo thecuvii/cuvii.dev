@@ -16,18 +16,14 @@ export function Gallery({ images }: { images: GalleryImageItem[] }) {
     return null
   }
 
-  const numCols = Math.max(1, Math.ceil(Math.sqrt(images.length)))
-
   return (
     <motion.div
       drag
-      className='will-change-transform inline-grid gap-16 -translate-x-1/2 -translate-y-1/2'
-      style={{
-        gridTemplateColumns: `repeat(${numCols}, 440px)`,
-      }}
+      transition={{ ease: 'easeInOut' }}
+      className='will-change-transform inline-flex flex-wrap gap-16 -translate-x-1/2 -translate-y-1/2'
     >
       {images.map((img) => {
-        const width = img.aspectRatio < 1 ? '260px' : '440px'
+        const width = img.aspectRatio < 1 ? '220px' : '400px'
         return (
           <GalleryImage
             key={img.url}
