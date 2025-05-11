@@ -46,6 +46,7 @@ export function GalleryImage({
           className={clsxm(
             'absolute inset-0 w-full h-auto',
             'group-hover:scale-[103%] transition-transform duration-400',
+            'grayscale-100 group-hover:grayscale-0',
           )}
           sizes='(min-width: 768px) min(33vw, 440px), (min-width: 640px) min(50vw, 440px), min(100vw, 440px)'
           draggable={false}
