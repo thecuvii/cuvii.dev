@@ -1,7 +1,6 @@
 'use client'
 
 import { atom } from 'jotai'
-import React, { useRef } from 'react'
 
 import { GalleryCanvas } from './canvas'
 import { GalleryImage } from './gallery-image'
@@ -19,7 +18,7 @@ export function Gallery({ images }: { images: GalleryImageItem[] }) {
     return null
   }
 
-  const SPACING = 64
+  const SPACING = 48
 
   // Calculate images per row based on square root of total count
   const imagesPerRow = Math.round(Math.sqrt(images.length))
