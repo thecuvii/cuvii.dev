@@ -7,6 +7,7 @@ export default antfu(
   {
     react: true,
     typescript: true,
+    stylistic: false,
 
     ignores: ['migrations/**/*', 'next-env.d.ts'],
   },
