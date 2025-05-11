@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react'
+import { clsxm } from '@zolplay/clsxm'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const ANIMATION_SETTINGS = {
@@ -10,17 +11,23 @@ const ANIMATION_SETTINGS = {
 export function GalleryCanvas({
   children,
   canDrag = true,
+  className,
+  style,
+  width,
+  height,
 }: {
   children: ReactNode
   canDrag?: boolean
   className?: string
   style?: CSSProperties
+  width?: number
+  height?: number
 }) {
   const galleryRef = useRef<HTMLDivElement>(null)
 
   // Refs for animation values that don't directly trigger re-renders
-  const currentX = useRef(0)
-  const currentY = useRef(0)
+  const currentX = useRef(width ? width / 2 : 0)
+  const currentY = useRef(height ? height / 2 : 0)
   const targetX = useRef(0)
   const targetY = useRef(0)
 
@@ -203,11 +210,12 @@ export function GalleryCanvas({
   return (
     <div
       ref={galleryRef}
-      className='will-change-transform inline-flex flex-wrap gap-16'
+      className={clsxm('will-change-transform origin-center', className)}
       style={{
         transform: `translate(${translateX}px, ${translateY}px)`,
         cursor: canDrag ? (isDragging ? 'grabbing' : 'grab') : 'default',
         touchAction: 'none', // Useful for preventing default touch behaviors on touch devices
+        ...style,
       }}
       onMouseDown={canDrag ? handleMouseDown : undefined}
       // Prevent browser's default image drag behavior

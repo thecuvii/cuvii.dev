@@ -26,11 +26,7 @@ export function GalleryImage({
   const isActive = false
 
   return (
-    <div
-      className={clsxm('relative shrink-0', className)}
-      style={style}
-      onClick={() => !isActive && setActiveImage(image)}
-    >
+    <div className={clsxm('relative', className)} style={style} onClick={() => !isActive && setActiveImage(image)}>
       {/* <MotionImage
         src={image.blurDataUrl}
         alt=''
