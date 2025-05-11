@@ -1,7 +1,5 @@
 'use client'
 
-import { atom } from 'jotai'
-
 import { GalleryCanvas } from './canvas'
 import { GalleryImage } from './gallery-image'
 
@@ -10,8 +8,6 @@ export type GalleryImageItem = {
   aspectRatio: number
   blurDataUrl: string
 }
-
-export const activeImageAtom = atom<GalleryImageItem | null>(null)
 
 export function Gallery({ images }: { images: GalleryImageItem[] }) {
   if (!images || images.length === 0) {
