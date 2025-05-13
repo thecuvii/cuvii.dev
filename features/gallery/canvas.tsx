@@ -1,3 +1,5 @@
+'use client'
+
 import type { CSSProperties, ReactNode } from 'react'
 import { clsxm } from '@zolplay/clsxm'
 import { useCallback, useEffect, useRef, useState } from 'react'
