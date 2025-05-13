@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { nanoid } from 'nanoid'
 
 import { cacheLife } from 'next/dist/server/use-cache/cache-life'
 import { JustifiedGallery } from '~/features/gallery'
@@ -15,12 +16,16 @@ export async function getImagesDatasource() {
   cacheLife('max')
   const imageKeys = await queryImageKeys()
 
-  return imageKeys
+  // For testing
+  const images = [...imageKeys, ...imageKeys, ...imageKeys, ...imageKeys, ...imageKeys, ...imageKeys, ...imageKeys]
+
+  return images
     .sort((a, b) => b.key.localeCompare(a.key))
     .map((imageKey) => {
       const cache = imageCache[imageKey.key as keyof typeof imageCache]
       const width = cache.aspectRatio < 1 ? 360 : 480
       return {
+        id: nanoid(),
         url: imageKey.url,
         aspectRatio: cache.aspectRatio,
         blurDataUrl: cache.blurDataUrl,

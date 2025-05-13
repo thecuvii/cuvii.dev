@@ -29,7 +29,7 @@ function createJustifiedLayout(images: Awaited<ReturnType<typeof getImagesDataso
   )
 }
 
-export function MasonryGallery({ images }: { images: Awaited<ReturnType<typeof getImagesDatasource>> }) {
+export function JustifiedGallery({ images }: { images: Awaited<ReturnType<typeof getImagesDatasource>> }) {
   const layout = createJustifiedLayout(images)
 
   return (
@@ -39,7 +39,7 @@ export function MasonryGallery({ images }: { images: Awaited<ReturnType<typeof g
           const img = images[idx]
           return (
             <GalleryImage
-              key={img.url}
+              key={img.id}
               image={img}
               className='absolute'
               style={{
