@@ -15,6 +15,7 @@
     "@egjs/react-infinitegrid": "^4.12.0",
     "@radix-ui/react-portal": "^1.1.8",
     "@zolplay/clsxm": "^1.0.0",
+    "better-justified-layout": "^1.0.0",
     "jotai": "^2.12.4",
     "motion": "^12.11.0",
     "next": "15.4.0-canary.33",
