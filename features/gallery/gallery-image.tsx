@@ -33,7 +33,8 @@ export function GalleryImage({
         <img
           src={image.blurDataUrl}
           alt=''
-          className={clsxm('w-full h-auto', image.aspectRatio && `aspect-[${image.aspectRatio}]`)}
+          className={clsxm('w-full h-auto grayscale-100')}
+          style={{ aspectRatio: image.aspectRatio }}
           draggable={false}
           width={0}
           height={0}
