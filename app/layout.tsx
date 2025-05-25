@@ -18,8 +18,7 @@ export default function RootLayout({
   return (
     <html lang='en' className={`${inter.variable} ${ibmPlexMono.variable} antialiased`}>
       <body>{children}</body>
-
-      <Script defer src='https://umami.cuvii.dev/script.js' data-website-id='a0d975d8-176f-47a3-9e87-abd06eb581e3' />
+      <Script src='https://rybbit.cuvii.dev/api/script.js' data-site-id='1' defer />
     </html>
   )
 }
