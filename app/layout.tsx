@@ -7,7 +7,7 @@ import { inter } from '~/lib/font/inter'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Cuvii.dev',
+  title: 'Yo',
   description: '',
 }
 

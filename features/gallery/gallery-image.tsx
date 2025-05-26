@@ -22,12 +22,22 @@ export function GalleryImage({
   className?: string
   style?: React.CSSProperties
 }) {
-  const [isGrayscale] = useQueryState('grayscale', parseAsBoolean.withDefault(true))
+  const [isGrayscale] = useQueryState('grayscale', parseAsBoolean.withDefault(false))
 
   const setActiveImage = useSetAtom(activeImageAtom)
   const isActive = useAtomValue(
     useMemo(() => selectAtom(activeImageAtom, (activeImage) => activeImage?.url === image.url), [image.url]),
   )
+
+  // Generate optimized sizes based on style.width
+  const optimizedSizes = useMemo(() => {
+    if (style?.width) {
+      const width = typeof style.width === 'number' ? `${style.width}px` : style.width
+      return width
+    }
+    // Fallback to responsive sizes if no specific width is provided
+    return '(min-width: 768px) min(33vw, 440px), (min-width: 640px) min(50vw, 440px), min(100vw, 440px)'
+  }, [style?.width])
 
   return (
     <div className={className} style={style} onClick={() => !isActive && setActiveImage(image)}>
@@ -52,7 +62,7 @@ export function GalleryImage({
             'group-hover:scale-[103%] transition-transform duration-400',
             isGrayscale ? 'grayscale-100 group-hover:grayscale-0' : 'grayscale-0',
           )}
-          sizes='(min-width: 768px) min(33vw, 440px), (min-width: 640px) min(50vw, 440px), min(100vw, 440px)'
+          sizes={optimizedSizes}
           draggable={false}
           width={0}
           height={0}

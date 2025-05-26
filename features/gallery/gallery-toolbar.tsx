@@ -6,7 +6,7 @@ import { parseAsBoolean, useQueryState } from 'nuqs'
 import { MLink } from '~/lib/motion'
 
 export function GalleryToolbar() {
-  const [isGrayscale, setIsGrayscale] = useQueryState('grayscale', parseAsBoolean.withDefault(true))
+  const [isGrayscale, setIsGrayscale] = useQueryState('grayscale', parseAsBoolean.withDefault(false))
 
   const toggleGrayscale = () => {
     setIsGrayscale(!isGrayscale)
