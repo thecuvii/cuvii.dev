@@ -1,6 +1,6 @@
 'use client'
 
-import { GalleryCanvas } from './canvas'
+import { DragCanvas } from './drag-canvas'
 import { GalleryImage } from './gallery-image'
 
 export type GalleryImageItem = {
@@ -117,7 +117,7 @@ export function Gallery({
   const { width: canvasWidth, height: canvasHeight } = calculateCanvasDimensions(positionedImages, galleryConfig)
 
   return (
-    <GalleryCanvas
+    <DragCanvas
       style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}
       width={canvasWidth}
       height={canvasHeight}
@@ -135,6 +135,6 @@ export function Gallery({
           image={image}
         />
       ))}
-    </GalleryCanvas>
+    </DragCanvas>
   )
 }
