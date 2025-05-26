@@ -27,7 +27,7 @@ export function GalleryImage({
   )
 
   return (
-    <div className={clsxm('', className)} style={style} onClick={() => !isActive && setActiveImage(image)}>
+    <div className={className} style={style} onClick={() => !isActive && setActiveImage(image)}>
       <div className='group relative overflow-hidden'>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
