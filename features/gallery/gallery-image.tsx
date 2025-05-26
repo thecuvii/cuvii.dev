@@ -6,6 +6,7 @@ import { useAtomValue, useSetAtom } from 'jotai'
 import { selectAtom } from 'jotai/utils'
 import { motion } from 'motion/react'
 import Image from 'next/image'
+import { parseAsBoolean, useQueryState } from 'nuqs'
 import { useMemo } from 'react'
 import { activeImageAtom } from './atom'
 import { generateCloudflareImageUrl } from './cf-image-loader'
@@ -21,6 +22,8 @@ export function GalleryImage({
   className?: string
   style?: React.CSSProperties
 }) {
+  const [isGrayscale] = useQueryState('grayscale', parseAsBoolean.withDefault(true))
+
   const setActiveImage = useSetAtom(activeImageAtom)
   const isActive = useAtomValue(
     useMemo(() => selectAtom(activeImageAtom, (activeImage) => activeImage?.url === image.url), [image.url]),
@@ -33,7 +36,7 @@ export function GalleryImage({
         <img
           src={image.blurDataUrl}
           alt=''
-          className={clsxm('w-full h-auto grayscale-100')}
+          className={clsxm('w-full h-auto', isGrayscale ? 'grayscale-100' : 'grayscale-0')}
           style={{ aspectRatio: image.aspectRatio }}
           draggable={false}
           width={0}
@@ -47,7 +50,7 @@ export function GalleryImage({
           className={clsxm(
             'absolute inset-0 w-full h-auto',
             'group-hover:scale-[103%] transition-transform duration-400',
-            'grayscale-100 group-hover:grayscale-0',
+            isGrayscale ? 'grayscale-100 group-hover:grayscale-0' : 'grayscale-0',
           )}
           sizes='(min-width: 768px) min(33vw, 440px), (min-width: 640px) min(50vw, 440px), min(100vw, 440px)'
           draggable={false}

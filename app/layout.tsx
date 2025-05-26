@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import Script from 'next/script'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { ibmPlexMono } from '~/lib/font/ibm-plex-mono'
 import { inter } from '~/lib/font/inter'
 import './globals.css'
@@ -17,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className={`${inter.variable} ${ibmPlexMono.variable} antialiased`}>
-      <body>{children}</body>
+      <body>
+        <NuqsAdapter>{children}</NuqsAdapter>
+      </body>
       <Script src='https://rybbit.cuvii.dev/api/script.js' data-site-id='1' defer />
     </html>
   )

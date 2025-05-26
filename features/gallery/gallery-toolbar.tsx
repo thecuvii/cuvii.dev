@@ -2,9 +2,16 @@
 
 import { clsxm } from '@zolplay/clsxm'
 import { motion } from 'motion/react'
+import { parseAsBoolean, useQueryState } from 'nuqs'
 import { MLink } from '~/lib/motion'
 
 export function GalleryToolbar() {
+  const [isGrayscale, setIsGrayscale] = useQueryState('grayscale', parseAsBoolean.withDefault(true))
+
+  const toggleGrayscale = () => {
+    setIsGrayscale(!isGrayscale)
+  }
+
   return (
     <motion.div
       initial={{ y: 150, opacity: 0, rotateX: 150, scale: 0.6 }}
@@ -24,10 +31,9 @@ export function GalleryToolbar() {
           'px-2 py-1.5 rounded-3xl',
           'border border-[#1D1F21] bg-[#1D1F21]',
           'backdrop-blur-sm',
-          'shadow-[0px_1px_5px_-2px_#e6e6e6]',
         )}
       >
-        <ToolbarItem onClick={() => {}} label='Toggle Color'>
+        <ToolbarItem onClick={toggleGrayscale} label='Toggle Color'>
           <span className='text-sm'>🎨</span>
           <span className='text-xs font-mono'>Color</span>
         </ToolbarItem>
