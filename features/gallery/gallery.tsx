@@ -2,6 +2,7 @@
 
 import { DragCanvas } from './drag-canvas'
 import { GalleryImage } from './gallery-image'
+import { GalleryToolbar } from './gallery-toolbar'
 
 export type GalleryImageItem = {
   url: string
@@ -117,24 +118,27 @@ export function Gallery({
   const { width: canvasWidth, height: canvasHeight } = calculateCanvasDimensions(positionedImages, galleryConfig)
 
   return (
-    <DragCanvas
-      style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}
-      width={canvasWidth}
-      height={canvasHeight}
-    >
-      {positionedImages.map(({ image, top, left, width, height }) => (
-        <GalleryImage
-          key={image.url}
-          className='absolute'
-          style={{
-            width: `${width}px`,
-            height: `${height}px`,
-            top: `${top}px`,
-            left: `${left}px`,
-          }}
-          image={image}
-        />
-      ))}
-    </DragCanvas>
+    <>
+      <DragCanvas
+        style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}
+        width={canvasWidth}
+        height={canvasHeight}
+      >
+        {positionedImages.map(({ image, top, left, width, height }) => (
+          <GalleryImage
+            key={image.url}
+            className='absolute'
+            style={{
+              width: `${width}px`,
+              height: `${height}px`,
+              top: `${top}px`,
+              left: `${left}px`,
+            }}
+            image={image}
+          />
+        ))}
+      </DragCanvas>
+      <GalleryToolbar />
+    </>
   )
 }
