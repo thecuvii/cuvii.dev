@@ -54,8 +54,8 @@ export function GalleryImage({
           width={0}
           height={0}
           quality={75}
+          loading='lazy'
         />
-        {/* <div className='absolute inset-0 bg-stone-900 opacity-0 group-hover:opacity-25 transition-opacity duration-150' /> */}
         <div className='font-good-monolith text-stone-200 text-xs absolute bottom-2 left-2'># 0001</div>
       </div>
       {/* {isActive && (

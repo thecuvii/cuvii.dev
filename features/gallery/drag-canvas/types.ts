@@ -1,8 +1,10 @@
+import type { CSSProperties, ReactNode, RefObject } from 'react'
+
 export type DragCanvasProps = {
-  children: React.ReactNode
+  children: ReactNode
   canDrag?: boolean
   className?: string
-  style?: React.CSSProperties
+  style?: CSSProperties
   width?: number
   height?: number
 }
@@ -15,17 +17,17 @@ export type DragState = {
 }
 
 export type DragRefs = {
-  currentX: React.MutableRefObject<number>
-  currentY: React.MutableRefObject<number>
-  targetX: React.MutableRefObject<number>
-  targetY: React.MutableRefObject<number>
-  dragStartX: React.MutableRefObject<number>
-  dragStartY: React.MutableRefObject<number>
-  lastDragTime: React.MutableRefObject<number>
-  dragVelocityX: React.MutableRefObject<number>
-  dragVelocityY: React.MutableRefObject<number>
-  animationFrameId: React.MutableRefObject<number | null>
-  touchIdentifier: React.MutableRefObject<number | null>
+  currentX: RefObject<number>
+  currentY: RefObject<number>
+  targetX: RefObject<number>
+  targetY: RefObject<number>
+  dragStartX: RefObject<number>
+  dragStartY: RefObject<number>
+  lastDragTime: RefObject<number>
+  dragVelocityX: RefObject<number>
+  dragVelocityY: RefObject<number>
+  animationFrameId: RefObject<number | null>
+  touchIdentifier: RefObject<number | null>
 }
 
 export type AnimationConfig = {
