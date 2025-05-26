@@ -12,15 +12,12 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.817.0",
-    "@egjs/react-infinitegrid": "^4.12.0",
     "@radix-ui/react-portal": "^1.1.9",
     "@zolplay/clsxm": "^1.0.0",
-    "better-justified-layout": "^1.0.0",
     "jotai": "^2.12.4",
     "motion": "^12.13.0",
     "nanoid": "^5.1.5",
     "next": "^15.3.2",
-    "potpack": "^2.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
