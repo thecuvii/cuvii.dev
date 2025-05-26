@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
         hostname: 'photography.cuvii.dev',
       },
     ],
+    deviceSizes: [],
+    imageSizes: [320, 480],
   },
   async headers() {
     return [
