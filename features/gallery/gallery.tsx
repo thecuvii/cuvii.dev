@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from 'react'
 import { DragCanvas } from './drag-canvas'
 import { GalleryImage } from './gallery-image'
 import { GalleryToolbar } from './gallery-toolbar'
@@ -118,7 +119,7 @@ export function Gallery({
   const { width: canvasWidth, height: canvasHeight } = calculateCanvasDimensions(positionedImages, galleryConfig)
 
   return (
-    <>
+    <Suspense>
       <DragCanvas
         style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}
         width={canvasWidth}
@@ -139,6 +140,6 @@ export function Gallery({
         ))}
       </DragCanvas>
       <GalleryToolbar />
-    </>
+    </Suspense>
   )
 }
