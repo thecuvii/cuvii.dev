@@ -2,13 +2,10 @@
 
 import type { GalleryImageItem } from './gallery'
 import { clsxm } from '@zolplay/clsxm'
-import { useAtomValue, useSetAtom } from 'jotai'
-import { selectAtom } from 'jotai/utils'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import { parseAsBoolean, useQueryState } from 'nuqs'
 import { useMemo } from 'react'
-import { activeImageAtom } from './atom'
 import { generateCloudflareImageUrl } from './cf-image-loader'
 
 const MotionImage = motion.create(Image)
@@ -24,10 +21,10 @@ export function GalleryImage({
 }) {
   const [isGrayscale] = useQueryState('grayscale', parseAsBoolean.withDefault(false))
 
-  const setActiveImage = useSetAtom(activeImageAtom)
-  const isActive = useAtomValue(
-    useMemo(() => selectAtom(activeImageAtom, (activeImage) => activeImage?.url === image.url), [image.url]),
-  )
+  // const setActiveImage = useSetAtom(activeImageAtom)
+  // const isActive = useAtomValue(
+  //   useMemo(() => selectAtom(activeImageAtom, (activeImage) => activeImage?.url === image.url), [image.url]),
+  // )
 
   // Generate optimized sizes based on style.width
   const optimizedSizes = useMemo(() => {
@@ -40,7 +37,7 @@ export function GalleryImage({
   }, [style?.width])
 
   return (
-    <div className={className} style={style} onClick={() => !isActive && setActiveImage(image)}>
+    <div className={className} style={style}>
       <div className='group relative overflow-hidden'>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
