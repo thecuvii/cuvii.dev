@@ -1,5 +1,3 @@
-'use client'
-
 import type { GalleryConfig } from './gallery-layout'
 import { DragCanvas } from './drag-canvas'
 import { GalleryGrid } from './gallery-grid'
