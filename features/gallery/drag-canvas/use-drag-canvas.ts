@@ -1,4 +1,4 @@
-import type { DragHandlers, DragState, DragVelocity } from './types'
+import type { DragHandlers, DragState } from './types'
 import { useMotionValue } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -12,11 +12,7 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
 
   // Drag state references
   const dragStartRef = useRef({ x: 0, y: 0 })
-  const lastPositionRef = useRef({ x: 0, y: 0 })
-  const lastTimeRef = useRef(0)
-  const velocityRef = useRef<DragVelocity>({ x: 0, y: 0 })
   const touchIdRef = useRef<number | null>(null)
-  const rafIdRef = useRef<number | null>(null)
 
   // Initialize canvas position
   useEffect(() => {
@@ -31,29 +27,6 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
     setIsInitialized(true)
   }, [width, height, isInitialized, x, y])
 
-  // Momentum animation
-  const animateMomentum = useCallback(() => {
-    const velocity = velocityRef.current
-    const threshold = 0.1
-
-    if (Math.abs(velocity.x) < threshold && Math.abs(velocity.y) < threshold) {
-      rafIdRef.current = null
-      return
-    }
-
-    const currentX = x.get()
-    const currentY = y.get()
-
-    x.set(currentX + velocity.x * 16) // 60fps assumption
-    y.set(currentY + velocity.y * 16)
-
-    // Apply friction
-    velocity.x *= 0.95
-    velocity.y *= 0.95
-
-    rafIdRef.current = requestAnimationFrame(animateMomentum)
-  }, [x, y])
-
   // Start drag
   const startDrag = useCallback(
     (clientX: number, clientY: number, touchId?: number) => {
@@ -61,18 +34,9 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
 
       setIsDragging(true)
       dragStartRef.current = { x: clientX - x.get(), y: clientY - y.get() }
-      lastPositionRef.current = { x: clientX, y: clientY }
-      lastTimeRef.current = Date.now()
-      velocityRef.current = { x: 0, y: 0 }
 
       if (touchId !== undefined) {
         touchIdRef.current = touchId
-      }
-
-      // Cancel any ongoing momentum animation
-      if (rafIdRef.current) {
-        cancelAnimationFrame(rafIdRef.current)
-        rafIdRef.current = null
       }
     },
     [canDrag, x, y],
@@ -88,20 +52,6 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
 
       x.set(newX)
       y.set(newY)
-
-      // Calculate velocity for momentum
-      const now = Date.now()
-      const deltaTime = now - lastTimeRef.current
-
-      if (deltaTime > 0) {
-        velocityRef.current = {
-          x: ((clientX - lastPositionRef.current.x) / deltaTime) * 16, // Scale for 60fps
-          y: ((clientY - lastPositionRef.current.y) / deltaTime) * 16,
-        }
-      }
-
-      lastPositionRef.current = { x: clientX, y: clientY }
-      lastTimeRef.current = now
     },
     [isDragging, x, y],
   )
@@ -110,17 +60,13 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
   const endDrag = useCallback(() => {
     setIsDragging(false)
     touchIdRef.current = null
-
-    // Start momentum animation if velocity is significant
-    const velocity = velocityRef.current
-    if (Math.abs(velocity.x) > 0.5 || Math.abs(velocity.y) > 0.5) {
-      animateMomentum()
-    }
-  }, [animateMomentum])
+  }, [])
 
   // Mouse handlers
   const handleMouseDown = useCallback(
     (event: React.MouseEvent) => {
+      if (!canDrag) return
+
       event.preventDefault()
       startDrag(event.clientX, event.clientY)
 
@@ -137,12 +83,14 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
       document.addEventListener('mousemove', handleMouseMove)
       document.addEventListener('mouseup', handleMouseUp)
     },
-    [startDrag, updateDrag, endDrag],
+    [startDrag, updateDrag, endDrag, canDrag],
   )
 
   // Touch handlers
   const handleTouchStart = useCallback(
     (event: React.TouchEvent) => {
+      if (!canDrag) return
+
       event.preventDefault()
       const touch = event.touches[0]
       if (!touch) return
@@ -161,13 +109,15 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
           endDrag()
           document.removeEventListener('touchmove', handleTouchMove)
           document.removeEventListener('touchend', handleTouchEnd)
+          document.removeEventListener('touchcancel', handleTouchEnd)
         }
       }
 
       document.addEventListener('touchmove', handleTouchMove, { passive: false })
-      document.addEventListener('touchend', handleTouchEnd)
+      document.addEventListener('touchend', handleTouchEnd, { passive: false })
+      document.addEventListener('touchcancel', handleTouchEnd, { passive: false })
     },
-    [startDrag, updateDrag, endDrag],
+    [canDrag, startDrag, updateDrag, endDrag],
   )
 
   const dragState: DragState = {
