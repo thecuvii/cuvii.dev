@@ -39,7 +39,7 @@ export function Gallery({
         style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}
       >
         <div
-          className='grid'
+          className='grid '
           style={{
             gridTemplateColumns: `repeat(${gridCols}, ${cellSize}px)`,
             gap: `${spacing}px`,
@@ -49,7 +49,7 @@ export function Gallery({
           {processedImages.map(({ image, width, height }) => (
             <div
               key={image.url}
-              className='flex items-center justify-center'
+              className='grid place-items-center '
               style={{
                 width: `${cellSize}px`,
                 height: `${cellSize}px`,
