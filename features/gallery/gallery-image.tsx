@@ -4,7 +4,6 @@ import type { GalleryImageItem } from './gallery'
 import { clsxm } from '@zolplay/clsxm'
 import { motion } from 'motion/react'
 import Image from 'next/image'
-import { parseAsBoolean, useQueryState } from 'nuqs'
 import { useMemo } from 'react'
 import { generateCloudflareImageUrl } from './cf-image-loader'
 
@@ -19,8 +18,6 @@ export function GalleryImage({
   className?: string
   style?: React.CSSProperties
 }) {
-  const [isGrayscale] = useQueryState('grayscale', parseAsBoolean.withDefault(false))
-
   const optimizedSizes = useMemo(() => {
     if (style?.width) {
       const width = typeof style.width === 'number' ? `${style.width}px` : style.width
@@ -35,7 +32,7 @@ export function GalleryImage({
       <img
         src={image.blurDataUrl}
         alt=''
-        className={clsxm('w-full h-auto', isGrayscale ? 'grayscale-100' : 'grayscale-0')}
+        className={clsxm('w-full h-auto')}
         style={{ aspectRatio: image.aspectRatio }}
         draggable={false}
         width={0}
@@ -49,7 +46,6 @@ export function GalleryImage({
         className={clsxm(
           'absolute inset-0 w-full h-auto',
           'group-hover:scale-[103%] transition-transform duration-400',
-          isGrayscale ? 'grayscale-100 group-hover:grayscale-0' : 'grayscale-0',
         )}
         sizes={optimizedSizes}
         draggable={false}
