@@ -24,28 +24,47 @@ export function Gallery({
   }
 
   const galleryConfig = { ...DEFAULT_CONFIG, ...config }
-  const { positionedImages, canvasWidth, canvasHeight } = calculateGalleryLayout(images, galleryConfig)
+  const { images: processedImages, gridCols, cellSize, spacing } = calculateGalleryLayout(images, galleryConfig)
+
+  // Calculate total canvas size for DragCanvas
+  const rows = Math.ceil(images.length / gridCols)
+  const canvasWidth = gridCols * cellSize + (gridCols + 1) * spacing
+  const canvasHeight = rows * cellSize + (rows + 1) * spacing
 
   return (
     <>
       <DragCanvas
-        style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}
         width={canvasWidth}
         height={canvasHeight}
+        style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}
       >
-        {positionedImages.map(({ image, top, left, width, height }) => (
-          <GalleryImage
-            key={image.url}
-            className='absolute'
-            style={{
-              width: `${width}px`,
-              height: `${height}px`,
-              top: `${top}px`,
-              left: `${left}px`,
-            }}
-            image={image}
-          />
-        ))}
+        <div
+          className='grid'
+          style={{
+            gridTemplateColumns: `repeat(${gridCols}, ${cellSize}px)`,
+            gap: `${spacing}px`,
+            padding: `${spacing}px`,
+          }}
+        >
+          {processedImages.map(({ image, width, height }) => (
+            <div
+              key={image.url}
+              className='flex items-center justify-center'
+              style={{
+                width: `${cellSize}px`,
+                height: `${cellSize}px`,
+              }}
+            >
+              <GalleryImage
+                style={{
+                  width: `${width}px`,
+                  height: `${height}px`,
+                }}
+                image={image}
+              />
+            </div>
+          ))}
+        </div>
       </DragCanvas>
       <GalleryToolbar />
     </>
