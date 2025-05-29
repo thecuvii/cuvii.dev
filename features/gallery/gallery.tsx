@@ -2,7 +2,7 @@
 
 import type { GalleryConfig } from './gallery-layout'
 import { DragCanvas } from './drag-canvas'
-import { GalleryImage } from './gallery-image'
+import { GalleryGrid } from './gallery-grid'
 import { calculateGalleryLayout, DEFAULT_CONFIG } from './gallery-layout'
 import { GalleryToolbar } from './gallery-toolbar'
 
@@ -38,33 +38,7 @@ export function Gallery({
         height={canvasHeight}
         style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}
       >
-        <div
-          className='grid '
-          style={{
-            gridTemplateColumns: `repeat(${gridCols}, ${cellSize}px)`,
-            gap: `${spacing}px`,
-            padding: `${spacing}px`,
-          }}
-        >
-          {processedImages.map(({ image, width, height }) => (
-            <div
-              key={image.url}
-              className='grid place-items-center '
-              style={{
-                width: `${cellSize}px`,
-                height: `${cellSize}px`,
-              }}
-            >
-              <GalleryImage
-                style={{
-                  width: `${width}px`,
-                  height: `${height}px`,
-                }}
-                image={image}
-              />
-            </div>
-          ))}
-        </div>
+        <GalleryGrid processedImages={processedImages} gridCols={gridCols} cellSize={cellSize} spacing={spacing} />
       </DragCanvas>
       <GalleryToolbar />
     </>
