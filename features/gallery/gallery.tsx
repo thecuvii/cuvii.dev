@@ -17,18 +17,24 @@ type PositionedImage = {
   left: number
   width: number
   height: number
+  cellWidth: number
+  cellHeight: number
 }
 
 type GalleryConfig = {
   spacing: number
   portraitWidth: number
   landscapeWidth: number
+  cellWidth: number
+  cellHeight: number
 }
 
 const DEFAULT_CONFIG: GalleryConfig = {
   spacing: 66,
   portraitWidth: 320,
   landscapeWidth: 480,
+  cellWidth: 520,
+  cellHeight: 520,
 }
 
 function calculateImageDimensions(aspectRatio: number, config: GalleryConfig) {
@@ -39,18 +45,6 @@ function calculateImageDimensions(aspectRatio: number, config: GalleryConfig) {
 
 function calculateImagesPerRow(totalImages: number): number {
   return Math.max(1, Math.round(Math.sqrt(totalImages)))
-}
-
-function getRowBounds(images: GalleryImageItem[], rowStartIndex: number, imagesPerRow: number, config: GalleryConfig) {
-  const rowEndIndex = Math.min(rowStartIndex + imagesPerRow, images.length) - 1
-  let maxHeight = 0
-
-  for (let i = rowStartIndex; i <= rowEndIndex; i++) {
-    const { height } = calculateImageDimensions(images[i].aspectRatio, config)
-    maxHeight = Math.max(maxHeight, height)
-  }
-
-  return { maxHeight }
 }
 
 function positionImages(images: GalleryImageItem[], config: GalleryConfig): PositionedImage[] {
@@ -64,27 +58,22 @@ function positionImages(images: GalleryImageItem[], config: GalleryConfig): Posi
 
     const { width, height } = calculateImageDimensions(image.aspectRatio, config)
 
-    // Calculate vertical position
-    let top = config.spacing
-    if (rowIndex > 0) {
-      const prevRowStartIndex = (rowIndex - 1) * imagesPerRow
-      const { maxHeight: prevRowHeight } = getRowBounds(images, prevRowStartIndex, imagesPerRow, config)
-      top = positionedImages[prevRowStartIndex].top + prevRowHeight + config.spacing
-    }
+    // Calculate cell position (top-left corner of the cell)
+    const cellTop = config.spacing + rowIndex * (config.cellHeight + config.spacing)
+    const cellLeft = config.spacing + colIndex * (config.cellWidth + config.spacing)
 
-    // Calculate horizontal position
-    let left = config.spacing
-    if (colIndex > 0) {
-      const prevImage = positionedImages[i - 1]
-      left = prevImage.left + prevImage.width + config.spacing
-    }
+    // Calculate image position within the cell (centered)
+    const imageTop = cellTop + (config.cellHeight - height) / 2
+    const imageLeft = cellLeft + (config.cellWidth - width) / 2
 
     positionedImages.push({
       image,
-      top,
-      left,
+      top: imageTop,
+      left: imageLeft,
       width,
       height,
+      cellWidth: config.cellWidth,
+      cellHeight: config.cellHeight,
     })
   }
 
@@ -96,11 +85,13 @@ function calculateCanvasDimensions(positionedImages: PositionedImage[], config: 
     return { width: 0, height: 0 }
   }
 
-  const maxRight = Math.max(...positionedImages.map(({ left, width }) => left + width)) + config.spacing
+  const imagesPerRow = calculateImagesPerRow(positionedImages.length)
+  const totalRows = Math.ceil(positionedImages.length / imagesPerRow)
 
-  const maxBottom = Math.max(...positionedImages.map(({ top, height }) => top + height)) + config.spacing
+  const width = config.spacing + imagesPerRow * config.cellWidth + (imagesPerRow - 1) * config.spacing + config.spacing
+  const height = config.spacing + totalRows * config.cellHeight + (totalRows - 1) * config.spacing + config.spacing
 
-  return { width: maxRight, height: maxBottom }
+  return { width, height }
 }
 
 export function Gallery({
