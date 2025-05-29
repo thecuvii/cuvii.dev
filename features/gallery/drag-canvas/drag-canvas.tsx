@@ -3,10 +3,29 @@
 import type { DragCanvasProps } from './types'
 import { clsxm } from '@zolplay/clsxm'
 import { motion } from 'motion/react'
+import { useEffect } from 'react'
 import { useDragCanvas } from './use-drag-canvas'
 
-export function DragCanvas({ children, canDrag = true, className, style, width, height }: DragCanvasProps) {
-  const { containerRef, dragState, dragHandlers, motionValues } = useDragCanvas(canDrag, width, height)
+export function DragCanvas({
+  children,
+  canDrag = true,
+  className,
+  style,
+  width,
+  height,
+  onControlsReady,
+}: DragCanvasProps) {
+  const { containerRef, dragState, dragHandlers, motionValues, resetPosition, randomPosition } = useDragCanvas(
+    canDrag,
+    width,
+    height,
+  )
+
+  useEffect(() => {
+    if (onControlsReady) {
+      onControlsReady({ resetPosition, randomPosition })
+    }
+  }, [onControlsReady, resetPosition, randomPosition])
 
   return (
     <motion.div

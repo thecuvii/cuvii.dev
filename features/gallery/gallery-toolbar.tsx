@@ -4,7 +4,12 @@ import { clsxm } from '@zolplay/clsxm'
 import { motion } from 'motion/react'
 import { MLink } from '~/lib/motion'
 
-export function GalleryToolbar() {
+type GalleryToolbarProps = {
+  onReset?: () => void
+  onRandom?: () => void
+}
+
+export function GalleryToolbar({ onReset, onRandom }: GalleryToolbarProps) {
   return (
     <motion.div
       initial={{ y: 150, opacity: 0, rotateX: 150, scale: 0.6 }}
@@ -26,11 +31,11 @@ export function GalleryToolbar() {
           'backdrop-blur-sm',
         )}
       >
-        <ToolbarItem onClick={() => {}} label='Random Position'>
+        <ToolbarItem onClick={onRandom || (() => {})} label='Random Position'>
           <span className='text-sm'>🎲</span>
           <span className='text-xs font-mono'>Random</span>
         </ToolbarItem>
-        <ToolbarItem onClick={() => {}} label='Reset Position'>
+        <ToolbarItem onClick={onReset || (() => {})} label='Reset Position'>
           <span className='text-sm'>🎯</span>
           <span className='text-xs font-mono'>Reset</span>
         </ToolbarItem>

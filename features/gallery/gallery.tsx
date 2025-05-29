@@ -1,4 +1,7 @@
+'use client'
+
 import type { GalleryConfig } from './gallery-layout'
+import { useRef } from 'react'
 import { DragCanvas } from './drag-canvas'
 import { GalleryGrid } from './gallery-grid'
 import { calculateGalleryLayout, DEFAULT_CONFIG } from './gallery-layout'
@@ -10,6 +13,11 @@ export type GalleryImageItem = {
   blurDataUrl: string
 }
 
+export type DragCanvasControls = {
+  resetPosition: () => void
+  randomPosition: () => void
+}
+
 export function Gallery({
   images,
   config = DEFAULT_CONFIG,
@@ -17,6 +25,8 @@ export function Gallery({
   images: GalleryImageItem[]
   config?: Partial<GalleryConfig>
 }) {
+  const dragControlsRef = useRef<DragCanvasControls | null>(null)
+
   if (!images?.length) {
     return null
   }
@@ -35,10 +45,16 @@ export function Gallery({
         width={canvasWidth}
         height={canvasHeight}
         style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}
+        onControlsReady={(controls) => {
+          dragControlsRef.current = controls
+        }}
       >
         <GalleryGrid processedImages={processedImages} gridCols={gridCols} cellSize={cellSize} spacing={spacing} />
       </DragCanvas>
-      <GalleryToolbar />
+      <GalleryToolbar
+        onReset={() => dragControlsRef.current?.resetPosition()}
+        onRandom={() => dragControlsRef.current?.randomPosition()}
+      />
     </>
   )
 }

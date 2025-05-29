@@ -1,5 +1,10 @@
 import type { CSSProperties, ReactNode } from 'react'
 
+export type DragCanvasControls = {
+  resetPosition: () => void
+  randomPosition: () => void
+}
+
 export type DragCanvasProps = {
   children: ReactNode
   canDrag?: boolean
@@ -7,6 +12,7 @@ export type DragCanvasProps = {
   style?: CSSProperties
   width?: number
   height?: number
+  onControlsReady?: (controls: DragCanvasControls) => void
 }
 
 export type DragState = {
