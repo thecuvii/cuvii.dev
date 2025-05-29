@@ -11,7 +11,7 @@ export function DragCanvas({ children, canDrag = true, className, style, width, 
   return (
     <motion.div
       ref={containerRef}
-      className={clsxm('will-change-transform origin-center', className)}
+      className={clsxm('will-change-transform origin-center absolute', className)}
       style={{
         x: motionValues.x,
         y: motionValues.y,

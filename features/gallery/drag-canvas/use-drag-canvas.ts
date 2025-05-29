@@ -11,6 +11,7 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
   const [isInitialized, setIsInitialized] = useState(false)
 
   // Drag state references
+  const dragStateRef = useRef({ isDragging: false })
   const dragStartRef = useRef({ x: 0, y: 0 })
   const touchIdRef = useRef<number | null>(null)
 
@@ -32,6 +33,7 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
     (clientX: number, clientY: number, touchId?: number) => {
       if (!canDrag) return
 
+      dragStateRef.current.isDragging = true
       setIsDragging(true)
       dragStartRef.current = { x: clientX - x.get(), y: clientY - y.get() }
 
@@ -45,7 +47,7 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
   // Update drag
   const updateDrag = useCallback(
     (clientX: number, clientY: number) => {
-      if (!isDragging) return
+      if (!dragStateRef.current.isDragging) return
 
       const newX = clientX - dragStartRef.current.x
       const newY = clientY - dragStartRef.current.y
@@ -53,11 +55,12 @@ export function useDragCanvas(canDrag: boolean, width: number | undefined, heigh
       x.set(newX)
       y.set(newY)
     },
-    [isDragging, x, y],
+    [x, y],
   )
 
   // End drag
   const endDrag = useCallback(() => {
+    dragStateRef.current.isDragging = false
     setIsDragging(false)
     touchIdRef.current = null
   }, [])
