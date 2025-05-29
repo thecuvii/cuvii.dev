@@ -1,8 +1,9 @@
 'use client'
 
+import type { DragCanvasControls } from './drag-canvas/drag-canvas'
 import type { GalleryConfig } from './gallery-layout'
 import { useRef } from 'react'
-import { DragCanvas } from './drag-canvas'
+import { DragCanvas } from './drag-canvas/drag-canvas'
 import { GalleryGrid } from './gallery-grid'
 import { calculateGalleryLayout, DEFAULT_CONFIG } from './gallery-layout'
 import { GalleryToolbar } from './gallery-toolbar'
@@ -11,11 +12,6 @@ export type GalleryImageItem = {
   url: string
   aspectRatio: number
   blurDataUrl: string
-}
-
-export type DragCanvasControls = {
-  resetPosition: () => void
-  randomPosition: () => void
 }
 
 export function Gallery({
@@ -54,6 +50,9 @@ export function Gallery({
       <GalleryToolbar
         onReset={() => dragControlsRef.current?.resetPosition()}
         onRandom={() => dragControlsRef.current?.randomPosition()}
+        onZoomIn={() => dragControlsRef.current?.zoomIn()}
+        onZoomOut={() => dragControlsRef.current?.zoomOut()}
+        onResetZoom={() => dragControlsRef.current?.resetZoom()}
       />
     </>
   )

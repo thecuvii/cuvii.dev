@@ -7,9 +7,12 @@ import { MLink } from '~/lib/motion'
 type GalleryToolbarProps = {
   onReset?: () => void
   onRandom?: () => void
+  onZoomIn?: () => void
+  onZoomOut?: () => void
+  onResetZoom?: () => void
 }
 
-export function GalleryToolbar({ onReset, onRandom }: GalleryToolbarProps) {
+export function GalleryToolbar({ onReset, onRandom, onZoomIn, onZoomOut, onResetZoom }: GalleryToolbarProps) {
   return (
     <motion.div
       initial={{ y: 150, opacity: 0, rotateX: 150, scale: 0.6 }}
@@ -38,6 +41,18 @@ export function GalleryToolbar({ onReset, onRandom }: GalleryToolbarProps) {
         <ToolbarItem onClick={onReset || (() => {})} label='Reset Position'>
           <span className='text-sm'>🎯</span>
           <span className='text-xs font-mono'>Reset</span>
+        </ToolbarItem>
+        <ToolbarItem onClick={onZoomIn || (() => {})} label='Zoom In'>
+          <span className='text-sm'>🔍</span>
+          <span className='text-xs font-mono'>Zoom+</span>
+        </ToolbarItem>
+        <ToolbarItem onClick={onZoomOut || (() => {})} label='Zoom Out'>
+          <span className='text-sm'>🔎</span>
+          <span className='text-xs font-mono'>Zoom-</span>
+        </ToolbarItem>
+        <ToolbarItem onClick={onResetZoom || (() => {})} label='Reset Zoom'>
+          <span className='text-sm'>📐</span>
+          <span className='text-xs font-mono'>1:1</span>
         </ToolbarItem>
         <ToolbarItem href='/' label='Home'>
           <span className='text-sm'>🏠</span>

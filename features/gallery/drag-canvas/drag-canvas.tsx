@@ -1,50 +1,95 @@
 'use client'
 
-import type { DragCanvasProps } from './types'
+import type { CSSProperties, ReactNode } from 'react'
 import { clsxm } from '@zolplay/clsxm'
-import { motion } from 'motion/react'
-import { useEffect } from 'react'
-import { useDragCanvas } from './use-drag-canvas'
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
+
+export type DragCanvasControls = {
+  resetPosition: () => void
+  randomPosition: () => void
+  resetZoom: () => void
+  zoomIn: () => void
+  zoomOut: () => void
+}
+
+export type DragCanvasProps = {
+  children: ReactNode
+  canDrag?: boolean
+  canZoom?: boolean
+  className?: string
+  style?: CSSProperties
+  width?: number
+  height?: number
+  minZoom?: number
+  maxZoom?: number
+  zoomStep?: number
+  onControlsReady?: (controls: DragCanvasControls) => void
+}
 
 export function DragCanvas({
   children,
   canDrag = true,
+  canZoom = true,
   className,
   style,
   width,
   height,
+  minZoom = 0.5,
+  maxZoom = 3,
+  zoomStep = 0.1,
   onControlsReady,
 }: DragCanvasProps) {
-  const { containerRef, dragState, dragHandlers, motionValues, resetPosition, randomPosition } = useDragCanvas(
-    canDrag,
-    width,
-    height,
-  )
-
-  useEffect(() => {
-    if (onControlsReady) {
-      onControlsReady({ resetPosition, randomPosition })
-    }
-  }, [onControlsReady, resetPosition, randomPosition])
-
   return (
-    <motion.div
-      ref={containerRef}
-      className={clsxm('will-change-transform origin-center absolute', className)}
-      style={{
-        x: motionValues.x,
-        y: motionValues.y,
-        cursor: canDrag ? (dragState.isDragging ? 'grabbing' : 'grab') : 'default',
-        touchAction: 'none',
-        opacity: dragState.isInitialized ? 1 : 0,
-        transition: dragState.isInitialized ? 'none' : 'opacity 0.2s ease-in-out',
-        ...style,
+    <TransformWrapper
+      initialScale={1}
+      minScale={minZoom}
+      maxScale={maxZoom}
+      wheel={{
+        disabled: !canZoom,
+        step: zoomStep,
       }}
-      onMouseDown={canDrag ? dragHandlers.onMouseDown : undefined}
-      onTouchStart={canDrag ? dragHandlers.onTouchStart : undefined}
-      onDragStart={(e) => e.preventDefault()}
+      panning={{
+        disabled: !canDrag,
+        velocityDisabled: false,
+      }}
+      doubleClick={{
+        disabled: !canZoom,
+        step: zoomStep * 2,
+      }}
+      limitToBounds={false}
+      centerOnInit={true}
     >
-      {children}
-    </motion.div>
+      {({ zoomIn, zoomOut, centerView, setTransform }) => {
+        // Expose controls through callback
+        if (onControlsReady) {
+          onControlsReady({
+            resetPosition: () => centerView(),
+            randomPosition: () => {
+              if (!width || !height) return
+              const randomX = (Math.random() - 0.5) * 200
+              const randomY = (Math.random() - 0.5) * 200
+              setTransform(randomX, randomY, 1)
+            },
+            resetZoom: () => setTransform(0, 0, 1),
+            zoomIn,
+            zoomOut,
+          })
+        }
+
+        return (
+          <TransformComponent
+            wrapperClass={clsxm('will-change-transform origin-center absolute w-full h-full', className)}
+            contentClass='w-full h-full'
+            wrapperStyle={{
+              cursor: canDrag ? 'grab' : 'default',
+              touchAction: 'none',
+              ...style,
+            }}
+          >
+            {children}
+          </TransformComponent>
+        )
+      }}
+    </TransformWrapper>
   )
 }
