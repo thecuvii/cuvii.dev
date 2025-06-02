@@ -13,7 +13,9 @@ export default function HomePage() {
           '[&_h2]:text-sm [&_h2]:text-[#090909] [&_h2]:mb-2',
           '[&_p]:text-xs',
           '[&_bold]:font-normal',
-          '[&_a]:text-xs [&_a]:underline ',
+          '[&_a]:text-xs [&_a]:underline',
+
+          'p-6 sm:p-0',
         )}
       >
         <CuviiIcon className='size-12 text-black' />
@@ -43,11 +45,11 @@ export default function HomePage() {
           </ul> */}
 
           <ul className='space-y-0.5'>
-<li>
-            <a href='https://github.com/thecuvii/fuji-recipes' target='_blank' rel='noopener noreferrer'>
-               FUJI RECIPES
-             </a>
-           </li>
+            <li>
+              <a href='https://github.com/thecuvii/fuji-recipes' target='_blank' rel='noopener noreferrer'>
+                FUJI RECIPES
+              </a>
+            </li>
             <li>
               <a href='https://github.com/thecuvii/devfools' target='_blank' rel='noopener noreferrer'>
                 DEVFOOLS
