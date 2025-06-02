@@ -14,6 +14,13 @@
   --font-inter: "Inter", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
   --font-good-monolith: "TheGoodMonolith", monospace;
+  
+  --animate-blink: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
 
+import { clsxm } from '@zolplay/clsxm'
 import Script from 'next/script'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { ibmPlexMono } from '~/lib/font/ibm-plex-mono'
-import { inter } from '~/lib/font/inter'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Yo',
-  description: '',
+  title: `Cuvii's site`,
+  description: 'Personal website and portfolio of Cuvii',
 }
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' className={`${inter.variable} ${ibmPlexMono.variable} antialiased`}>
+    <html lang='en' className={clsxm(ibmPlexMono.variable, 'antialiased')}>
       <body>
         <NuqsAdapter>{children}</NuqsAdapter>
       </body>
