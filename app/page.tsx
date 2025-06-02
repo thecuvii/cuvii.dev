@@ -43,11 +43,11 @@ export default function HomePage() {
           </ul> */}
 
           <ul className='space-y-0.5'>
-            <li>
-              <a href='https://github.com/thecuvii/devfools' target='_blank' rel='noopener noreferrer'>
-                FUJI RECIPES
-              </a>
-            </li>
+<li>
+            <a href='https://github.com/thecuvii/fuji-recipes' target='_blank' rel='noopener noreferrer'>
+               FUJI RECIPES
+             </a>
+           </li>
             <li>
               <a href='https://github.com/thecuvii/devfools' target='_blank' rel='noopener noreferrer'>
                 DEVFOOLS
@@ -64,7 +64,7 @@ export default function HomePage() {
         <section>
           <h2>CONTACT</h2>
           <p>
-            <a href='mailto:yo@cuvii.de'>yo@cuvii.de</a> or{' '}
+            <a href='mailto:yo@cuvii.dev'>yo@cuvii.dev</a> or{' '}
             <a href='https://x.com/thecuvii' target='_blank' rel='noopener noreferrer'>
               X
             </a>
