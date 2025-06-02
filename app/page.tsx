@@ -10,7 +10,7 @@ export default function HomePage() {
           'space-y-8',
           'text-xs text-[#616161]',
           '[*]:uppercase',
-          '[&_h2]:text-sm [&_h2]:text-[#090909] [&_h2]:mb-2',
+          '[&_h2]:text-sm [&_h2]:text-[#090909] [&_h2]:mb-2 [&_h2]:relative [&_h2]:before:content-[">"] [&_h2]:before:absolute [&_h2]:before:left-[-1rem] [&_h2]:before:text-[8px] [&_h2]:before:top-1/2 [&_h2]:before:-translate-y-1/2',
           '[&_p]:text-xs',
           '[&_bold]:font-normal',
           '[&_a]:text-xs [&_a]:underline',
