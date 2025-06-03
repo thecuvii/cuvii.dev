@@ -9,6 +9,10 @@ import './globals.css'
 export const metadata: Metadata = {
   title: `Cuvii's site`,
   description: 'Personal website and portfolio of Cuvii',
+  openGraph: {
+    siteName: `Cuvii's site`,
+    url: 'https://cuvii.dev',
+  },
 }
 
 export default function RootLayout({
