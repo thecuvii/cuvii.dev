@@ -7,7 +7,9 @@ export default function HomePage() {
       <div
         className={clsxm(
           'max-w-[33rem] mt-40 mx-auto',
+          'p-8 sm:p-0',
           'space-y-8',
+
           'text-xs text-[#616161]',
           '[*]:uppercase',
           '[&_h2]:text-sm [&_h2]:text-[#090909] [&_h2]:mb-2 [&_h2]:relative [&_h2]:before:content-[">"] [&_h2]:before:absolute [&_h2]:before:left-[-1rem] [&_h2]:before:text-[8px] [&_h2]:before:top-1/2 [&_h2]:before:-translate-y-1/2',
@@ -15,7 +17,7 @@ export default function HomePage() {
           '[&_bold]:font-normal',
           '[&_a]:text-xs [&_a]:underline',
 
-          'p-6 sm:p-0',
+          'selection:bg-[#616161] selection:text-[#fafafa]',
         )}
       >
         <CuviiIcon className='size-12 text-black' />
