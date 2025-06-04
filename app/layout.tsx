@@ -30,7 +30,7 @@ export default function RootLayout({
       <Script
         defer
         data-domain='cuvii.dev'
-        src='https://plausible.cuvii.dev/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js'
+        src='https://plausible.cuvii.dev/js/script.file-downloads.hash.outbound-links.js'
       />
     </html>
   )
