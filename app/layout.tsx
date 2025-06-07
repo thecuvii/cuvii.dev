@@ -25,8 +25,6 @@ export default function RootLayout({
       <body>
         <NuqsAdapter>{children}</NuqsAdapter>
       </body>
-      <Script src='https://rybbit.cuvii.dev/api/script.js' data-site-id='1' defer />
-
       <Script
         defer
         data-domain='cuvii.dev'

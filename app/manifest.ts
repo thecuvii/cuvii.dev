@@ -2,13 +2,13 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'cuvii.dev',
-    short_name: 'cuvii.dev',
-    description: 'Personal website and portfolio',
+    name: `Cuvii's site`,
+    short_name: `Cuvii's site`,
+    description: 'Personal website and portfolio of Cuvii',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#ffffff',
+    background_color: '#fafafa',
+    theme_color: '#fafafa',
     icons: [
       {
         src: '/android-chrome-192x192.png',

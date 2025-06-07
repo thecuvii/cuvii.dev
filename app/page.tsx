@@ -1,5 +1,6 @@
 import { clsxm } from '@zolplay/clsxm'
 import { CuviiIcon } from '~/components/icons/cuvii'
+import { CuviiFlicker } from '~/components/icons/cuvii-flicker'
 
 export default function HomePage() {
   return (
@@ -21,6 +22,7 @@ export default function HomePage() {
         )}
       >
         <CuviiIcon className='size-12 text-black' />
+        <CuviiFlicker />
 
         <section>
           <h2>INTRO</h2>
@@ -38,13 +40,6 @@ export default function HomePage() {
 
         <section>
           <h2>Works</h2>
-
-          {/* <h3>Websites & Apps</h3>
-          <ul className='ml-4 space-y-0.5 mt-1.5'>
-            <li>
-              <a href=''>FUJI RECIPES</a>
-            </li>
-          </ul> */}
 
           <ul className='space-y-0.5'>
             <li>
