@@ -3,7 +3,7 @@
 import type React from 'react'
 import { clsxm } from '@zolplay/clsxm'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { type ComponentProps, useEffect, useMemo, useRef, useState } from 'react'
 
 type FlickeringGridProps = {
   squareSize?: number
@@ -199,7 +199,7 @@ const backgroundGridSettingsForEffect: GeneratedGridSettings = {
   gridGap: 4,
 }
 
-export const CuviiFlicker = () => {
+export const CuviiFlicker = ({ className, ...props }: ComponentProps<'div'>) => {
   const maskStyle: React.CSSProperties | undefined = svgDataUrlForEffect
     ? {
         WebkitMaskImage: `url('${svgDataUrlForEffect}')`,
@@ -214,7 +214,7 @@ export const CuviiFlicker = () => {
     : undefined
 
   return (
-    <div className='relative w-full h-screen bg-[#fafafa] overflow-hidden px-8'>
+    <div className={clsxm('relative w-full overflow-hidden', className)} {...props}>
       <FlickeringGrid className='absolute inset-0 z-0' {...backgroundGridSettingsForEffect} startImmediately={true} />
       {maskStyle && (
         <div className='absolute inset-0 z-10' style={maskStyle}>
