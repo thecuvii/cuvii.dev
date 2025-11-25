@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <div className='flex min-h-screen flex-col justify-end font-bold tracking-tight'>
+    <div className='flex min-h-dvh flex-col justify-end font-bold tracking-tight'>
       <main className='px-6 pb-12 sm:px-10 md:px-16 lg:px-0 lg:pl-24'>
         <section>
           <h1 className='text-6xl font-bold sm:text-7xl md:text-8xl lg:text-9xl'>Cuvii.</h1>
