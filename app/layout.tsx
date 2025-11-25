@@ -21,6 +21,10 @@ export const metadata: Metadata = {
     siteName: `Cuvii's site`,
     url: 'https://cuvii.dev',
   },
+  metadataBase: new URL('https://cuvii.dev'),
+  alternates: {
+    canonical: 'https://cuvii.dev',
+  },
 }
 
 export default function RootLayout({
