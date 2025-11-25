@@ -3,12 +3,12 @@ export default function Home() {
     <div className='flex min-h-screen flex-col justify-end font-bold tracking-tight'>
       <main className='pb-12 pl-24'>
         <section>
-          <h1 className='text-9xl font-black tracking-tighter'>Cuvii.</h1>
+          <h1 className='text-9xl font-bold'>Cuvii.</h1>
           <p>Design Enginner. </p>
           <p>Photographer. </p>
         </section>
 
-        <section className='mt-12 text-xs font-bold tracking-normal'>
+        <section className='mt-12 font-mono text-xs tracking-normal'>
           <ul>
             <li>
               <a className='underline-offset-4 hover:underline' href='mailto:yo@cuvii.dev'>
