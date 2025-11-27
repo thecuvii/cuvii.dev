@@ -5,7 +5,7 @@ export default function Home() {
         <section>
           <h1 className='text-6xl font-bold sm:text-7xl md:text-8xl lg:text-9xl'>Cuvii.</h1>
           <p className='ml-1'>Design Engineer. </p>
-          <p className='ml-1'>Photographer. </p>
+          <p className='ml-1'>Street Photographer. </p>
         </section>
 
         <section className='mt-12 ml-1 font-mono text-xs tracking-normal'>
