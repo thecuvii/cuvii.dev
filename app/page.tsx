@@ -18,22 +18,22 @@ export default function Home() {
             <section className='font-mono text-xs tracking-normal'>
               <ul>
                 <li>
-                  <a className='underline-offset-4 hover:underline' href='mailto:yo@cuvii.dev'>
+                  <a className='underline-offset-4 hover:underline' href='https://umami.cuvii.dev/q/PnuZgn6Eo'>
                     yo@cuvii.dev
                   </a>
                 </li>
                 <li>
-                  <a className='hover:underline' href='https://x.com/thecuvii'>
+                  <a className='hover:underline' href='https://umami.cuvii.dev/q/JRUtAuBWX'>
                     x.com/thecuvii
                   </a>
                 </li>
                 <li>
-                  <a className='hover:underline' href='https://github.com/thecuvii'>
+                  <a className='hover:underline' href='https://umami.cuvii.dev/q/7DawydkoW'>
                     github.com/thecuvii
                   </a>
                 </li>
                 <li>
-                  <a className='hover:underline' href='https://unsplash.com/@cuvii'>
+                  <a className='hover:underline' href='https://umami.cuvii.dev/q/xKpbDXKei'>
                     unsplash.com/@cuvii
                   </a>
                 </li>
