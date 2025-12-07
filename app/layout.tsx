@@ -15,10 +15,10 @@ const ibmPlexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: `Cuvii's site`,
+  title: `Cuvii`,
   description: 'Personal website of Cuvii',
   openGraph: {
-    siteName: `Cuvii's site`,
+    siteName: `Cuvii`,
     url: 'https://cuvii.dev',
   },
   metadataBase: new URL('https://cuvii.dev'),
